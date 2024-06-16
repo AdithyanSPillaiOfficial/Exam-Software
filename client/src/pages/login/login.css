@@ -1,0 +1,56 @@
+.sysanduser {
+    width: 100%;
+    background-color: #666666;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sysinfo {
+    align-items: flex-start;
+    text-align: left;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+
+}
+
+.sysname {
+    font-size: 42px;
+    color: #f0f30e;
+}
+
+.userinfo {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+.userinfoinfo {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    height: 100%;
+    justify-content: space-around;
+    margin-right: 15px;
+}
+
+.applicantname {
+    color: white;
+
+}
+
+.normtext {
+    font-size: 20px;
+    color: white;
+}
+
+.imagediv {
+    height: 148px;
+    width: 150px;
+    background-color: white;
+    margin-bottom: 2px;
+}

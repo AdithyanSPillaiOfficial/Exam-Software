@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -13,6 +13,17 @@ import {
 function App() {
   const [count, setCount] = useState(0)
   const isLogedIn = sessionStorage.getItem('isLogedIn');
+
+  useEffect(() => {
+    const handleContextmenu = e => {
+        e.preventDefault()
+        alert("Warning : Donot rightclick in this window")
+    }
+    document.addEventListener('contextmenu', handleContextmenu)
+    return function cleanup() {
+        document.removeEventListener('contextmenu', handleContextmenu)
+    }
+}, [ ])
 
   if ((screen.availHeight || screen.height - 30) <= window.innerHeight) {
     alert("Kiosk")
