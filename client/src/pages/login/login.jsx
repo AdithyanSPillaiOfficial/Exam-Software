@@ -20,6 +20,27 @@ function Login() {
           </div>
         </div>
       </div>
+
+      <div className='remindsection'>
+        <div className="loginformtitlebar bordersimple">
+          <label >Login</label>
+        </div>
+        <div className="formdiv bordersimple">
+          <div className='inputdiv'>
+            <div className='personicondiv bordersimple'><img src="https://drubinbarneslab.berkeley.edu/wp-content/uploads/2012/01/icon-profile.png" className='personicon' alt="" /></div>
+            <input type="text" placeholder='1111' className='forminput bordersimple' />
+          </div>
+
+          <div className='inputdiv'>
+            <div className='personicondiv bordersimple'><img src="https://cdn-icons-png.freepik.com/512/2893/2893425.png" className='personicon' alt="" /></div>
+            <input type="password" placeholder='Password' className='forminput bordersimple' />
+          </div>
+
+          <div className="buttondiv">
+            <button className='submitbtn'>Login</button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
