@@ -1,0 +1,39 @@
+.exampage {
+    width: 100%;
+    height: 90%;
+}
+
+.examheader {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #373736;
+    color: white;
+    height: 30px;
+    text-align: left;
+    padding-left: 20px;
+    color: #e5ff00;
+}
+
+.examdiv {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+
+.questionpane {
+    width: 85%;
+    background-color: #efefee;
+    text-align: left;
+}
+
+.subjectbar {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.subject {
+    background-color: #369eef;
+    width: 150px;
+    padding: 5px;
+}

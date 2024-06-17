@@ -9,6 +9,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ExamPage from './pages/exam/exampage';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,11 @@ function App() {
   if ((screen.availHeight || screen.height - 30) <= window.innerHeight) {
     alert("Kiosk")
   }
+  // else {
+  //   return (
+  //     <div><h1>Please Open The App in Kiosk Mode</h1></div>
+  //   )
+  // }
 
   var homepage;
   if (isLogedIn) {
@@ -58,6 +64,14 @@ function App() {
           element: <Login />
         },
       ]
+    },
+    {
+      path: "/instruction",
+      element: <Instruction />
+    },
+    {
+      path : '/exampage',
+      element : <ExamPage />
     }
   ]);
 
