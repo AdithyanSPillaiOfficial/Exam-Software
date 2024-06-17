@@ -23,17 +23,95 @@
 
 .questionpane {
     width: 85%;
-    background-color: #efefee;
     text-align: left;
 }
 
 .subjectbar {
     padding: 10px;
     box-sizing: border-box;
+    background-color: #efefee;
 }
 
 .subject {
     background-color: #369eef;
     width: 150px;
     padding: 5px;
+}
+
+.sectionandtime {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding-left: 10px;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.titlesection {
+    margin-left: 10px;
+}
+
+.timeleft {
+    margin-right: 10px;
+}
+
+.sections {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+
+.section {
+    background-color: #5479c8;
+    width: 130px;
+    padding: 5px;
+    padding-left: 10px;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(155, 155, 155, 0.336);
+    
+}
+
+.sectionoff {
+    background-color: white;
+    color: black;
+}
+
+.questionnumbar {
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.controlbuttons {
+    margin-top: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.controlbuttons div {
+    display: flex;
+    gap: 5px;
+}
+
+.normbtn {
+    background-color: white;
+    border: 1px solid black;
+}
+
+.normbtn:hover {
+    background-color: #369eef;
+    color: white;
+}
+
+.savenextbtn {
+    background-color: #369eef;
+    color: white;
 }
