@@ -10,6 +10,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ExamPage from './pages/exam/exampage';
+import { SocketProvider } from './socketContext';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -77,8 +78,10 @@ function App() {
 
   return (
     <>
-      <div className='examnameheader'>Adithya Exam Browser</div>
-      <RouterProvider router={router} />
+      {/* <SocketProvider> */}
+        <div className='examnameheader'>Adithya Exam Browser</div>
+        <RouterProvider router={router} />
+      {/* </SocketProvider> */}
     </>
 
   )

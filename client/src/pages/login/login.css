@@ -125,3 +125,8 @@
     width: 100%;
     color: white;
 }
+
+.submitbtn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}

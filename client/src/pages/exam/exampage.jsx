@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './exampage.css'
 import QuestionView from './questionview/questionview'
 import { useNavigate } from 'react-router-dom';
+import { socket, connectSocket, disconnectSocket, connectionStatus } from "../../socket";
+
 
 function ExamPage() {
     const navigate = useNavigate();
@@ -11,7 +13,6 @@ function ExamPage() {
     function handleExamSubmit() {
         navigate('/login');
     }
-
 
     const initialTime = 180 * 60;
     const [seconds, setSeconds] = useState(20);
