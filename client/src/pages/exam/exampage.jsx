@@ -3,6 +3,9 @@ import './exampage.css'
 import QuestionView from './questionview/questionview'
 
 function ExamPage() {
+
+    const samplearray = [1,2,3,4,5,6,7,9,10];
+
     return (
         <div className='exampage'>
             <div className="examheader">
@@ -62,6 +65,23 @@ function ExamPage() {
                             <div className="ansrev"></div>
                             <label>Answered and Marked for Review</label>
                         </div>
+                    </div>
+                    <div className='navigator bordersimple'>
+                        <div className="navtitle">Computer Science</div>
+
+                        <div className='navtilediv'>
+                            {
+                                samplearray.map(num => (
+                                    <div className='navtile'>
+                                        <div className="notvis">{num}</div>
+                                    </div>
+                                ))
+                            }
+
+                        </div>
+                    </div>
+                    <div className="submitdiv">
+                        <button className="examsubmitbtn">Submit</button>
                     </div>
                 </div>
             </div>
