@@ -3,7 +3,7 @@ import './questionview.css'
 
 function QuestionView() {
     return (
-        <div>
+        <div className='questionview'>
             <div className="questiontype bordersimple">
                 Question Type : MCQ
             </div>

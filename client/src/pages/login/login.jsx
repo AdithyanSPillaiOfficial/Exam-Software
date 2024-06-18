@@ -1,6 +1,14 @@
 import React from 'react'
 import './login.css'
+import { useNavigate } from 'react-router-dom'
 function Login() {
+
+  const navigate = useNavigate();
+
+  function loginHandler() {
+    navigate('/instruction');
+  }
+
   return (
     <div>
       <div className='sysanduser'>
@@ -37,7 +45,7 @@ function Login() {
           </div>
 
           <div className="buttondiv">
-            <button className='submitbtn'>Login</button>
+            <button className='submitbtn' onClick={loginHandler}>Login</button>
           </div>
         </div>
       </div>

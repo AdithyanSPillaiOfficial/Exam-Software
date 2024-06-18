@@ -115,3 +115,96 @@
     background-color: #369eef;
     color: white;
 }
+
+.palattepane {
+    width: 14.9%;
+}
+
+.usercontainer {
+    display: flex;
+    flex-direction: row;
+    background-color: #f8faff;
+    width: 100%;
+    border: 0.5px solid rgba(172, 172, 172, 0.795);
+}
+.userimage {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.username {
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    font-size: 20px;
+}
+
+.status {
+    padding: 20px;
+    padding-right: 0;
+    padding-bottom: 0;
+    border-right: none;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.status div {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.ans {
+    width: 29px;
+    height: 26px;
+    /* background-color: #07ba05; */
+    background: url('https://www.digialm.com/OnlineAssessment/images/questions-sprite.png') no-repeat;
+    background-position: -7px -55px;
+    clip-path: polygon(20% 0, 80% 0, 100% 20%,100% 100%, 0 100%, 0 20% );
+    scale: 1.5;
+    margin-right: 10px;
+}
+
+.notans {
+    width: 29px;
+    height: 26px;
+    /* background-color: #07ba05; */
+    background: url('https://www.digialm.com/OnlineAssessment/images/questions-sprite.png') no-repeat;
+    background-position: -42px -56px;
+    scale: 1.5;
+    margin-right: 10px;
+}
+
+.notvis {
+    width: 29px;
+    height: 26px;
+    /* background-color: #07ba05; */
+    background: url('https://www.digialm.com/OnlineAssessment/images/questions-sprite.png') no-repeat;
+    background-position: -107px -56px;
+    scale: 1.5;
+    margin-right: 10px;
+}
+
+.rev {
+    width: 29px;
+    height: 29px;
+    /* background-color: #07ba05; */
+    background: url('https://www.digialm.com/OnlineAssessment/images/questions-sprite.png') no-repeat;
+    background-position: -75px -54px;
+    scale: 1.5;
+    margin-right: 10px;
+}
+
+.ansrev {
+    width: 29px;
+    height: 29px;
+    /* background-color: #07ba05; */
+    background: url('https://www.digialm.com/OnlineAssessment/images/questions-sprite.png') no-repeat;
+    background-position: -9px -87px;
+    clip-path: polygon(20% 0, 80% 0, 100% 20%,100% 100%, 0 100%, 0 20% );
+    scale: 1.5;
+    margin-right: 10px;
+}
