@@ -1,7 +1,7 @@
 import React from 'react'
 import './questionview.css'
 
-function QuestionView() {
+function QuestionView(props) {
     return (
         <div className='questionview'>
             <div className="questiontype bordersimple">
@@ -11,23 +11,18 @@ function QuestionView() {
                 <form action="#" method="post">
                     <fieldset>
                         <legend>Question </legend>
-                        <p>Which Concept is used in Queue</p>
-                        <label className='option'>
-                            <input type="radio" name="question" value="FIFO" />
-                            FIFO
-                        </label><br />
-                        <label className='option'>
-                            <input type="radio" name="question" value="LIFO" />
-                            LIFO
-                        </label><br />
-                        <label className='option'>
-                            <input type="radio" name="question" value="FILO" />
-                            FILO
-                        </label><br />
-                        <label className='option'>
-                            <input type="radio" name="question" value="LILA" />
-                            LILA
-                        </label><br />
+                        <p>{props.question.qn}</p>
+                        {
+                            props.question.options.map((option, index) => (
+                                <div>
+                                    <label className='option' key={index} onChange={(e)=>{props.saveAnswer(index); props.question.answer = index}}>
+                                        <input type="radio" name="question" value={option} checked={props.question.answer === index} />
+                                        {option}
+                                    </label><br />
+                                </div>
+
+                            ))
+                        }
                     </fieldset>
                 </form>
             </div>

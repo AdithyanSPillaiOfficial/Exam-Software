@@ -3,19 +3,24 @@ import './exampage.css'
 import QuestionView from './questionview/questionview'
 import { useNavigate } from 'react-router-dom';
 import { socket, connectSocket, disconnectSocket, connectionStatus } from "../../socket";
-
+import { sampleqn } from './sampleqn';
+var i = 0;
 
 function ExamPage() {
     const navigate = useNavigate();
 
-    const samplearray = [1,2,3,4,5,6,7,9,10];
+    const samplearray = [1, 2, 3, 4, 5, 6, 7, 9, 10];
+
+    const questions = sampleqn;
+    const [qnNum, setQnNum] = useState(1);
+    const [currentQn, setCurrentQn] = useState(sampleqn[0])
 
     function handleExamSubmit() {
         navigate('/login');
     }
 
-    const initialTime = 180 * 60;
-    const [seconds, setSeconds] = useState(20);
+    const initialTime = 10 * 60;
+    const [seconds, setSeconds] = useState(initialTime);
 
     // Function to decrement the timer value
     const tick = () => {
@@ -36,7 +41,26 @@ function ExamPage() {
         return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     };
 
-    
+    async function handleSaveNext() {
+        if (i+1 < questions.length) {
+            i++;
+            setQnNum(i+1);
+            setCurrentQn(questions[i]);
+        }
+        else {
+            i=0;
+            setQnNum(i+1)
+            setCurrentQn(questions[i]);
+        }
+    }
+
+
+    const saveAnswer = (index) => {
+        questions[i].answer = index;
+        // setCurrentQn(questions[i]);
+    }
+
+
 
 
     return (
@@ -60,15 +84,15 @@ function ExamPage() {
                         <div className={"section" + " " + "sectionoff"}>Operating Systems  </div>
                     </div>
                     <div className="questionnumbar bordersimple">
-                        <label >Question Number : 1</label>
+                        <label >Question Number : {qnNum} / {questions.length}</label>
                     </div>
-                    <QuestionView />
+                    <QuestionView question={currentQn} saveAnswer = {saveAnswer} />
                     <div className="controlbuttons">
                         <div>
                             <button className="normbtn">Mark for Review and Next</button>
                             <button className="normbtn">Clear Responce</button>
                         </div>
-                        <button className='savenextbtn'>Save and Next</button>
+                        <button className='savenextbtn' onClick={handleSaveNext}>Save and Next</button>
                     </div>
                 </div>
 
