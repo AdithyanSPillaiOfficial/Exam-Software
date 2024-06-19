@@ -1,7 +1,7 @@
 // src/socket.js
 import { io } from "socket.io-client";
 
-const SOCKET_URL = "http://192.168.1.3:5000"; // Replace with your server URL if different
+const SOCKET_URL = "http://192.168.1.5:5000"; // Replace with your server URL if different
 export var connectionStatus = false;
 
 export const socket = io(SOCKET_URL, {
@@ -26,3 +26,5 @@ export var systemname = 'Disconnected';
 socket.on("systemregistered", (sysname) => {
   systemname = sysname;
 });
+
+export var user;

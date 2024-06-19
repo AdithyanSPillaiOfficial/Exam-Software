@@ -3,6 +3,7 @@ import './login.css'
 import { useNavigate } from 'react-router-dom'
 import { useSocket } from '../../socketContext';
 import { socket, connectSocket, disconnectSocket, connectionStatus, systemname } from "../../socket";
+import { handleSubmit, handleVerify } from './auth';
 
 function Login() {
   // const socket = useSocket();
@@ -11,13 +12,19 @@ function Login() {
 
   const [systemName, setSystemName] = useState(systemname)
   const [permitLogin, setPermitLogin] = useState(false);
+  const [userVarified, setUserVerified] = useState(false);
+  const [loginStatus, setLoginStatus] = useState(false);
+  const [userName, setUserName] = useState('Name')
+
+  const [uname, setUname] = useState('');
+  const [password, setPassword] = useState('')
   // const [reqFlag, setReqFlag] = useState(false);
   var reqFlag = false;
 
   useEffect(() => {
 
     if (reqFlag == false) {
-      if(connectionStatus == false ){connectSocket();}
+      if (connectionStatus == false) { connectSocket(); }
       reqFlag = true;
 
       socket.on("connect", () => {
@@ -37,8 +44,45 @@ function Login() {
     };
   }, []);
 
-  function loginHandler() {
-    navigate('/instruction');
+  async function loginHandler() {
+    //navigate('/instruction');
+    const userCred = {
+      username: uname,
+      password: password,
+      sysname : systemName
+    };
+    if (userVarified) {
+      const responce = await handleSubmit(userCred);
+      if (responce != false && responce != 'error') {
+        localStorage.setItem('isLogedIn', true);
+        setLoginStatus(true);
+        sessionStorage.setItem('logedIn', true);
+        sessionStorage.setItem('sessionId', responce.sessionId);
+        navigate('/instruction');
+      }
+      else {
+        alert('Login Failed');
+        console.log(status);
+      }
+    }
+    else {
+      const responce = await handleVerify(userCred);
+      if (responce != false && responce != 'Exam Already Submitted') {
+        sessionStorage.setItem('sessionId', responce.sessionId);
+        sessionStorage.setItem('username', responce.name);
+        setUserName(responce.name);
+        setUserVerified(true);
+        //navigate('/instruction');
+      }
+      else if (responce === 'Exam Already Submitted'){
+        alert('Exam Already Submitted');
+      }
+
+      else {
+        alert('User verification Failed');
+        console.log(status);
+      }
+    }
   }
 
   return (
@@ -52,7 +96,7 @@ function Login() {
         <div className="userinfo">
           <div className='userinfoinfo'>
             <label className="normtext">Name : </label>
-            <label className="sysname">Name</label>
+            <label className="sysname">{userName}</label>
             <label className="normtext">Subject : <label style={{ color: '#f0f30e' }}>KEAM</label></label>
           </div>
           <div className='imagediv'>
@@ -68,16 +112,16 @@ function Login() {
         <div className="formdiv bordersimple">
           <div className='inputdiv'>
             <div className='personicondiv bordersimple'><img src="https://drubinbarneslab.berkeley.edu/wp-content/uploads/2012/01/icon-profile.png" className='personicon' alt="" /></div>
-            <input type="text" placeholder='1111' className='forminput bordersimple' />
+            <input type="text" placeholder='1111' value={uname} onChange={(e) => setUname(e.target.value)} className='forminput bordersimple' />
           </div>
 
           <div className='inputdiv'>
             <div className='personicondiv bordersimple'><img src="https://cdn-icons-png.freepik.com/512/2893/2893425.png" className='personicon' alt="" /></div>
-            <input type="password" placeholder='Password' className='forminput bordersimple' />
+            <input type="password" placeholder='Password' disabled={userVarified ? false : true} value={password} onChange={(e) => setPassword(e.target.value)} className='forminput bordersimple' />
           </div>
 
           <div className="buttondiv">
-            <button className='submitbtn' onClick={loginHandler} disabled={!permitLogin}>Login</button>
+            <button className='submitbtn' onClick={loginHandler} disabled={!permitLogin}>{userVarified ? 'Login' : 'Verify'}</button>
           </div>
         </div>
       </div>

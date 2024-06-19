@@ -29,7 +29,7 @@ function Instruction() {
 
       <div className="userpane">
         <img className='userimg' src="https://media.istockphoto.com/id/1177794485/vector/person-gray-photo-placeholder-woman.jpg?s=612x612&w=0&k=20&c=B41l9xgyu4bR63vPqt49mKZIRGh8ewpewN7zXnYPOsI=" alt="User Image" height={150} width={150} />
-        <label className='applicantnameblack'>Name</label>
+        <label className='applicantnameblack'>{sessionStorage.getItem('username')}</label>
       </div>
 
     </div>

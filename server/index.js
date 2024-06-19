@@ -1,6 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const http = require('http');
 const socketIo = require('socket.io');
+const verify = require('./handlers/verify');
+const login = require('./handlers/login');
 
 const app = express();
 const server = http.createServer(app);
@@ -22,6 +25,12 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 });
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
 
 
 // Set up a simple route
@@ -51,6 +60,10 @@ io.on('connection', (socket) => {
   //   io.emit('chat message', msg); // Broadcast the message to all clients
   // });
 });
+
+
+app.post('/verify',verify);
+app.post('/login', login);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
