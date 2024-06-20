@@ -4,10 +4,13 @@ import QuestionView from './questionview/questionview'
 import { useNavigate } from 'react-router-dom';
 import { socket, connectSocket, disconnectSocket, connectionStatus } from "../../socket";
 import { sampleqn } from './sampleqn';
+import { examdetails } from './mediator';
 var i = 0;
 
 function ExamPage() {
     const navigate = useNavigate();
+
+    const qnSections = examdetails.sections;
 
 
     const questions = sampleqn;
@@ -119,7 +122,12 @@ function ExamPage() {
                         <label className='timeleft'>Time Left : {formatTime(seconds)}</label>
                     </div>
                     <div className="sections bordersimple">
-                        <div className={"section"}>Data Structures  </div>
+                        {/* <div className={"section"}>Data Structures  </div> */}
+                        {
+                            qnSections.map((section, index)=> (
+                                <div className={"section"} key={index}>{section}  </div>
+                            ))
+                        }
                         <div className={"section" + " " + "sectionoff"}>Operating Systems  </div>
                     </div>
                     <div className="questionnumbar bordersimple">

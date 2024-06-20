@@ -4,6 +4,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const verify = require('./handlers/verify');
 const login = require('./handlers/login');
+const examdetails = require('./handlers/examdetails');
+const fetchquestion = require('./handlers/fetchquestion');
 
 const app = express();
 const server = http.createServer(app);
@@ -45,7 +47,8 @@ io.on('connection', (socket) => {
   socket.on('registerSystem', () => {
     systemNameIndex++;
     const systemname = 'C' + systemNameIndex;
-    socket.emit('systemregistered', systemname);
+    const examname = 'KEAM'
+    socket.emit('systemregistered', {systemname,examname});
     console.log('a system connected, Name : ' + systemname);
   })
 
@@ -64,6 +67,8 @@ io.on('connection', (socket) => {
 
 app.post('/verify',verify);
 app.post('/login', login);
+app.post('/examdetails', examdetails);
+app.post('/fetchquestion', fetchquestion);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

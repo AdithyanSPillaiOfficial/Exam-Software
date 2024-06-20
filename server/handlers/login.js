@@ -18,8 +18,9 @@ module.exports = async function (req, res) {
             else {
                 const currentISOTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
                 const currentYear = new Date().getFullYear();
+                console.log("Login Request from the user : "+req.body.username);
                 const insertResult = await sessionCollection.insertOne({
-                    'regno': req.body.regno,
+                    'regno': req.body.username,
                     'name': users[0].name,
                     'sysname': req.body.sysname,
                     'exam': users[0].exam,

@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react'
 import './instruction.css'
 import InstructionsHtml from './instructions'
 import { Route, useNavigate } from 'react-router-dom';
+import { fetchExamDetails, fetchQuestions } from '../exam/mediator';
 function Instruction() {
   const [agreeTOC, setAgreeTOC] = useState(false);
   const navigate = useNavigate()
 
-  function startExamHandler(){
-    navigate('/exampage')
+  async function startExamHandler() {
+    const detfetchstat = await fetchExamDetails();
+    const qnfetchstat = await fetchQuestions();
+    if (detfetchstat && qnfetchstat) {
+      navigate('/exampage')
+    }
+    else {
+      alert('ERROR : CONTACT INVIGILATOR IMMEDIATELY');
+    }
   }
 
   return (
@@ -22,7 +30,7 @@ function Instruction() {
           <InstructionsHtml />
         </div>
         <div className='instructionfooter'>
-          <label><input type="checkbox" name="agree" id="agree" onChange={(e)=>setAgreeTOC(!agreeTOC)} value={agreeTOC} /> Agree to Terms & Conditions and I have read Instructions </label>
+          <label><input type="checkbox" name="agree" id="agree" onChange={(e) => setAgreeTOC(!agreeTOC)} value={agreeTOC} /> Agree to Terms & Conditions and I have read Instructions </label>
           <button className='startexambtn' disabled={!agreeTOC} onClick={startExamHandler}>Start Exam</button>
         </div>
       </div>

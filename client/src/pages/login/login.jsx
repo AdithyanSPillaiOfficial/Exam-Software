@@ -15,6 +15,7 @@ function Login() {
   const [userVarified, setUserVerified] = useState(false);
   const [loginStatus, setLoginStatus] = useState(false);
   const [userName, setUserName] = useState('Name')
+  const [examName, setExamName] = useState('Disconnected');
 
   const [uname, setUname] = useState('');
   const [password, setPassword] = useState('')
@@ -33,8 +34,10 @@ function Login() {
       });
     }
 
-    socket.on("systemregistered", (sysname) => {
-      setSystemName(sysname);
+    socket.on("systemregistered", ({systemname, examname}) => {
+      setSystemName(systemname);
+      setExamName(examname);
+      sessionStorage.setItem('examname',examname);
       setPermitLogin(true);
     });
 
@@ -57,7 +60,7 @@ function Login() {
         localStorage.setItem('isLogedIn', true);
         setLoginStatus(true);
         sessionStorage.setItem('logedIn', true);
-        sessionStorage.setItem('sessionId', responce.sessionId);
+        sessionStorage.setItem('sessionId', responce.sessionid);
         navigate('/instruction');
       }
       else {
@@ -97,7 +100,7 @@ function Login() {
           <div className='userinfoinfo'>
             <label className="normtext">Name : </label>
             <label className="sysname">{userName}</label>
-            <label className="normtext">Subject : <label style={{ color: '#f0f30e' }}>KEAM</label></label>
+            <label className="normtext">Subject : <label style={{ color: '#f0f30e' }}>{examName}</label></label>
           </div>
           <div className='imagediv'>
             <img src="https://media.istockphoto.com/id/1177794485/vector/person-gray-photo-placeholder-woman.jpg?s=612x612&w=0&k=20&c=B41l9xgyu4bR63vPqt49mKZIRGh8ewpewN7zXnYPOsI=" alt="User Image" height={150} width={150} />
