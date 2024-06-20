@@ -166,6 +166,7 @@
     clip-path: polygon(20% 0, 80% 0, 100% 20%,100% 100%, 0 100%, 0 20% );
     scale: 1.5;
     margin-right: 10px;
+    color: white;
 }
 
 .notans {
@@ -176,6 +177,7 @@
     background-position: -42px -56px;
     scale: 1.5;
     margin-right: 10px;
+    color: white;
 }
 
 .notvis {
@@ -196,6 +198,7 @@
     background-position: -75px -54px;
     scale: 1.5;
     margin-right: 10px;
+    color: white;
 }
 
 .ansrev {
@@ -207,10 +210,12 @@
     clip-path: polygon(20% 0, 80% 0, 100% 20%,100% 100%, 0 100%, 0 20% );
     scale: 1.5;
     margin-right: 10px;
+    color: white;
 }
 
 .navigator {
     height: 47.6vh;
+    overflow: scroll;
 }
 
 .navtitle {

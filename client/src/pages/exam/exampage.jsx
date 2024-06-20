@@ -9,11 +9,11 @@ var i = 0;
 function ExamPage() {
     const navigate = useNavigate();
 
-    const samplearray = [1, 2, 3, 4, 5, 6, 7, 9, 10];
 
     const questions = sampleqn;
     const [qnNum, setQnNum] = useState(1);
     const [currentQn, setCurrentQn] = useState(sampleqn[0])
+    questions[0].visited = true;
 
     function handleExamSubmit() {
         navigate('/login');
@@ -46,6 +46,7 @@ function ExamPage() {
             i++;
             setQnNum(i+1);
             setCurrentQn(questions[i]);
+            questions[i].visited = true;
         }
         else {
             i=0;
@@ -57,7 +58,45 @@ function ExamPage() {
 
     const saveAnswer = (index) => {
         questions[i].answer = index;
+        questions[i].answered = true;
         // setCurrentQn(questions[i]);
+    }
+
+    function handleTileClick(index) {
+        i = index;
+        setCurrentQn(questions[i])
+        setQnNum(i+1);
+        questions[i].visited = true;
+    }
+
+    function classListMaker(question) {
+        if(question.review && question.answered){
+            return("ansrev")
+        }
+        else if(question.review) {
+            return("rev")
+        }
+        else if(question.answered){
+            return("ans")
+        }
+        else if(question.visited){
+            return("notans")
+        }
+        else {
+            return("notvis")
+        }
+    }
+
+    async function handleReviewNext() {
+        questions[i].review = true;
+        await 
+        handleSaveNext();
+    }
+
+    function handleClearResponce() {
+        delete questions[i].answer;
+        questions[i].answered = false;
+        questions[i].review = false;
     }
 
 
@@ -89,8 +128,8 @@ function ExamPage() {
                     <QuestionView question={currentQn} saveAnswer = {saveAnswer} />
                     <div className="controlbuttons">
                         <div>
-                            <button className="normbtn">Mark for Review and Next</button>
-                            <button className="normbtn">Clear Responce</button>
+                            <button className="normbtn" onClick={handleReviewNext}>Mark for Review and Next</button>
+                            <button className="normbtn" onClick={handleClearResponce}>Clear Responce</button>
                         </div>
                         <button className='savenextbtn' onClick={handleSaveNext}>Save and Next</button>
                     </div>
@@ -99,7 +138,7 @@ function ExamPage() {
                 <div className="palattepane">
                     <div className='usercontainer'>
                         <img className='userimage' src="https://media.istockphoto.com/id/1177794485/vector/person-gray-photo-placeholder-woman.jpg?s=612x612&w=0&k=20&c=B41l9xgyu4bR63vPqt49mKZIRGh8ewpewN7zXnYPOsI=" alt="User Image" height={100} width={100} />
-                        <label className='username'>Name</label>
+                        <label className='username'>{sessionStorage.getItem('username')}</label>
                     </div>
                     <div className="status bordersimple">
                         <div>
@@ -128,9 +167,9 @@ function ExamPage() {
 
                         <div className='navtilediv'>
                             {
-                                samplearray.map(num => (
+                                questions.map((question, index) => (
                                     <div className='navtile'>
-                                        <div className="notvis">{num}</div>
+                                        <div className={classListMaker(question)} onClick={()=>handleTileClick(index)}>{index+1}</div>
                                     </div>
                                 ))
                             }
