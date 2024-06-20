@@ -4,19 +4,30 @@ import QuestionView from './questionview/questionview'
 import { useNavigate } from 'react-router-dom';
 import { socket, connectSocket, disconnectSocket, connectionStatus } from "../../socket";
 import { sampleqn } from './sampleqn';
-import { examdetails } from './mediator';
+import { examQuestions, examdetails } from './mediator';
 var i = 0;
 
 function ExamPage() {
     const navigate = useNavigate();
 
     const qnSections = examdetails.sections;
+    const questions = examQuestions;
+    const [sectionIndicator, setSectionIndicator] = useState(0);
+
+    function updateSection(index) {
+        setSectionIndicator(index);
+    }
+
+    useEffect(() => {
+      handleTileClick(0);
+    }, [sectionIndicator])
+    
 
 
-    const questions = sampleqn;
+    const sectionQuestion = questions[sectionIndicator];
     const [qnNum, setQnNum] = useState(1);
-    const [currentQn, setCurrentQn] = useState(sampleqn[0])
-    questions[0].visited = true;
+    const [currentQn, setCurrentQn] = useState(sectionQuestion[0])
+    sectionQuestion[0].visited = true;
 
     function handleExamSubmit() {
         navigate('/login');
@@ -45,31 +56,31 @@ function ExamPage() {
     };
 
     async function handleSaveNext() {
-        if (i+1 < questions.length) {
+        if (i+1 < sectionQuestion.length) {
             i++;
             setQnNum(i+1);
-            setCurrentQn(questions[i]);
-            questions[i].visited = true;
+            setCurrentQn(sectionQuestion[i]);
+            sectionQuestion[i].visited = true;
         }
         else {
             i=0;
             setQnNum(i+1)
-            setCurrentQn(questions[i]);
+            setCurrentQn(sectionQuestion[i]);
         }
     }
 
 
     const saveAnswer = (index) => {
-        questions[i].answer = index;
-        questions[i].answered = true;
-        // setCurrentQn(questions[i]);
+        sectionQuestion[i].answer = index;
+        sectionQuestion[i].answered = true;
+        // setCurrentQn(sectionQuestion[i]);
     }
 
     function handleTileClick(index) {
         i = index;
-        setCurrentQn(questions[i])
+        setCurrentQn(sectionQuestion[i])
         setQnNum(i+1);
-        questions[i].visited = true;
+        sectionQuestion[i].visited = true;
     }
 
     function classListMaker(question) {
@@ -91,15 +102,15 @@ function ExamPage() {
     }
 
     async function handleReviewNext() {
-        questions[i].review = true;
+        sectionQuestion[i].review = true;
         await 
         handleSaveNext();
     }
 
     function handleClearResponce() {
-        delete questions[i].answer;
-        questions[i].answered = false;
-        questions[i].review = false;
+        delete sectionQuestion[i].answer;
+        sectionQuestion[i].answered = false;
+        sectionQuestion[i].review = false;
     }
 
 
@@ -125,13 +136,13 @@ function ExamPage() {
                         {/* <div className={"section"}>Data Structures  </div> */}
                         {
                             qnSections.map((section, index)=> (
-                                <div className={"section"} key={index}>{section}  </div>
+                                <div className={sectionIndicator==index ? "section" : "section " + "sectionoff" } key={index} onClick={()=>updateSection(index)}>{section}  </div>
                             ))
                         }
-                        <div className={"section" + " " + "sectionoff"}>Operating Systems  </div>
+                        {/* <div className={"section" + " " + "sectionoff"}>Operating Systems  </div> */}
                     </div>
                     <div className="questionnumbar bordersimple">
-                        <label >Question Number : {qnNum} / {questions.length}</label>
+                        <label >Question Number : {qnNum} / {sectionQuestion.length}</label>
                     </div>
                     <QuestionView question={currentQn} saveAnswer = {saveAnswer} />
                     <div className="controlbuttons">
@@ -171,11 +182,11 @@ function ExamPage() {
                         </div>
                     </div>
                     <div className='navigator bordersimple'>
-                        <div className="navtitle">Computer Science</div>
+                        <div className="navtitle">{qnSections[sectionIndicator]}</div>
 
                         <div className='navtilediv'>
                             {
-                                questions.map((question, index) => (
+                                sectionQuestion.map((question, index) => (
                                     <div className='navtile'>
                                         <div className={classListMaker(question)} onClick={()=>handleTileClick(index)}>{index+1}</div>
                                     </div>

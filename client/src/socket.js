@@ -23,8 +23,8 @@ export const disconnectSocket = () => {
 };
 
 export var systemname = 'Disconnected';
-socket.on("systemregistered", (sysname) => {
-  systemname = sysname;
+socket.on("systemregistered", (obj) => {
+  systemname = obj.systemname;
 });
 
 export var user;

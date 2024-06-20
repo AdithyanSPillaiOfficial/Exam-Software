@@ -48,7 +48,8 @@ io.on('connection', (socket) => {
     systemNameIndex++;
     const systemname = 'C' + systemNameIndex;
     const examname = 'KEAM'
-    socket.emit('systemregistered', {systemname,examname});
+    const sendObj = {systemname : systemname,examname : examname}
+    socket.emit('systemregistered', sendObj);
     console.log('a system connected, Name : ' + systemname);
   })
 
