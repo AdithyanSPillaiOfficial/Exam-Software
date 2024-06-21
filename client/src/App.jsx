@@ -28,7 +28,10 @@ function App() {
 }, [ ])
 
   if ((screen.availHeight || screen.height - 30) <= window.innerHeight) {
-    alert("Kiosk")
+    
+  }
+  else {
+    alert("Please turn on Kiosk mode")
   }
   // else {
   //   return (

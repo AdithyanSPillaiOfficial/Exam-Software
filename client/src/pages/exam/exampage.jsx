@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { socket, connectSocket, disconnectSocket, connectionStatus } from "../../socket";
 import { sampleqn } from './sampleqn';
 import { examQuestions, examdetails } from './mediator';
+import { saveAnswertoDB } from './saveanswertodb';
 var i = 0;
 
 function ExamPage() {
@@ -73,6 +74,9 @@ function ExamPage() {
     const saveAnswer = (index) => {
         sectionQuestion[i].answer = index;
         sectionQuestion[i].answered = true;
+        if(!saveAnswertoDB(i, index)){
+            alert("CONNECTION TO SERVER LOST. CONTACT INVIGILATOR IMMEDIATELY");
+        }
         // setCurrentQn(sectionQuestion[i]);
     }
 
