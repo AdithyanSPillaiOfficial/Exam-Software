@@ -73,6 +73,7 @@ function Login() {
       if (responce != false && responce != 'Exam Already Submitted') {
         sessionStorage.setItem('sessionId', responce.sessionId);
         sessionStorage.setItem('username', responce.name);
+        sessionStorage.setItem('examname',responce.exam)
         setUserName(responce.name);
         setUserVerified(true);
         //navigate('/instruction');
@@ -115,7 +116,7 @@ function Login() {
         <div className="formdiv bordersimple">
           <div className='inputdiv'>
             <div className='personicondiv bordersimple'><img src="https://drubinbarneslab.berkeley.edu/wp-content/uploads/2012/01/icon-profile.png" className='personicon' alt="" /></div>
-            <input type="text" placeholder='1111' value={uname} onChange={(e) => setUname(e.target.value)} className='forminput bordersimple' />
+            <input type="text" placeholder='1111' disabled={userVarified ? true : false} value={uname} onChange={(e) => setUname(e.target.value)} className='forminput bordersimple' />
           </div>
 
           <div className='inputdiv'>

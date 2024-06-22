@@ -11,7 +11,7 @@ function QuestionView(props) {
                 <form action="#" method="post">
                     <fieldset>
                         <legend>Question </legend>
-                        <p>{props.question.qn}</p>
+                        <p>{props.question.question}</p>
                         {
                             props.question.options.map((option, index) => (
                                 <div>

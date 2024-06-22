@@ -17,6 +17,7 @@ module.exports = async function (req, res) {
                 console.log(users[0]);
                 const userDetails = {
                     name: users[0].name,
+                    exam: users[0].exam,
                 }
                 res.json({ 'status': 'OK', 'userdetails': userDetails })
             }

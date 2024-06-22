@@ -34,7 +34,7 @@ function ExamPage() {
         navigate('/login');
     }
 
-    const initialTime = 10 * 60;
+    const initialTime = examdetails.time * 60;
     const [seconds, setSeconds] = useState(initialTime);
 
     // Function to decrement the timer value
@@ -123,13 +123,13 @@ function ExamPage() {
     return (
         <div className='exampage'>
             <div className="examheader">
-                <label>CSE Computer Science and Engineering</label>
+                <label>{examdetails.longname}</label>
             </div>
             <div className="examdiv">
                 <div className="questionpane">
                     <div className="subjectbar">
                         <div className="subject">
-                            Computer Science
+                            {examdetails.name}
                         </div>
                     </div>
                     <div className="sectionandtime bordersimple">

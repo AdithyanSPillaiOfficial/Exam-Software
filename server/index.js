@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
   socket.on('registerSystem', () => {
     systemNameIndex++;
     const systemname = 'C' + systemNameIndex;
-    const examname = 'KEAM'
+    const examname = 'Comprehensive-Viva'
     const sendObj = {systemname : systemname,examname : examname}
     socket.emit('systemregistered', sendObj);
     console.log('a system connected, Name : ' + systemname);
