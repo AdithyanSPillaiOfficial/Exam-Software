@@ -12,7 +12,7 @@ module.exports = async function (req, res) {
         try {
             const filter = { regno : session.data.regno }; // The filter to select the document to update
             const update = {
-                $set: { [`answers.${req.body.index}`]: req.body.answer } // Update the element at index 2 of the array
+                $set: { [`answers.${req.body.section}.${req.body.index}`]: req.body.answer } // Update the element at index 2 of the array
             };
             const options = { upsert: true };
 

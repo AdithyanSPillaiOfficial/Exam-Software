@@ -1,4 +1,5 @@
 const { ObjectId } = require('mongodb');
+const getans = require('../utilities/getans');
 
 module.exports = async function (req, res) {
     const database = require('../connector')
@@ -22,6 +23,14 @@ module.exports = async function (req, res) {
                     const questionsArray = await questionCursor.toArray();
                     if(questionsArray.length==1){
                         const questions = questionsArray[0].questions
+                        // const answers = getans(req.body.sessionid);
+                        // if(answers!=false){
+                        //     questions.forEach((question, index) => {
+                        //         if(answers[index]){
+                        //             question.answer = answers[index];
+                        //         }
+                        //     });
+                        // }
                         res.json({'status' : 'OK', questions : questions, totalSections : exams[0].totalsections});
                     }
                 } 

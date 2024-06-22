@@ -7,6 +7,7 @@ const login = require('./handlers/login');
 const examdetails = require('./handlers/examdetails');
 const fetchquestion = require('./handlers/fetchquestion');
 const saveAnswer = require('./handlers/saveAnswer');
+const getanswers = require('./handlers/getanswers');
 
 const app = express();
 const server = http.createServer(app);
@@ -72,6 +73,7 @@ app.post('/login', login);
 app.post('/examdetails', examdetails);
 app.post('/fetchquestion', fetchquestion);
 app.post('/saveanswer', saveAnswer);
+app.post('/getanswers', getanswers);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

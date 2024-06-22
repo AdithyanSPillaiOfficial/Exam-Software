@@ -43,7 +43,7 @@ module.exports = async function (req, res) {
                 await answerSheetCollection.createIndex({ regno: 1 }, { unique: true });
 
                 // Document to be inserted or updated
-                const doc = { regno: users[0].regno, answers: [] };
+                const doc = { regno: users[0].regno, answers: [[null],[null],[null]] };
 
                 // Upsert operation: Insert document if regno does not exist, update if it does
                 const filter = { regno: users[0].regno };

@@ -1,13 +1,13 @@
 import { serverAddress } from "../../api";
 
-async function saveAnswertoDB(index, answer){
+async function saveAnswertoDB(index, sectionIndicator, answer){
     try {
         const responce = await fetch(serverAddress+'/saveanswer',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
             },
-            body: JSON.stringify({sessionid : sessionStorage.getItem('sessionId'), index : index, answer : answer}),
+            body: JSON.stringify({sessionid : sessionStorage.getItem('sessionId'), index : index,section : sectionIndicator, answer : answer}),
         });
 
         if(responce.ok){
