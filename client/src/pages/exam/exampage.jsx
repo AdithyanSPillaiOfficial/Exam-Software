@@ -71,10 +71,10 @@ function ExamPage() {
     }
 
 
-    const saveAnswer = (index) => {
+    const saveAnswer = async (index) => {
         sectionQuestion[i].answer = index;
         sectionQuestion[i].answered = true;
-        if(!saveAnswertoDB(i, sectionIndicator, index)){
+        if(! await saveAnswertoDB(i, sectionIndicator, index)){
             alert("CONNECTION TO SERVER LOST. CONTACT INVIGILATOR IMMEDIATELY");
         }
         // setCurrentQn(sectionQuestion[i]);

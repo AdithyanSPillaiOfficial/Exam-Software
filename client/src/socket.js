@@ -1,7 +1,8 @@
 // src/socket.js
 import { io } from "socket.io-client";
+import { serverAddress } from "./api";
 
-const SOCKET_URL = "http://192.168.1.5:5000"; // Replace with your server URL if different
+const SOCKET_URL = serverAddress; // Replace with your server URL if different
 export var connectionStatus = false;
 
 export const socket = io(SOCKET_URL, {
