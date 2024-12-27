@@ -112,6 +112,7 @@ function ExamPage() {
     }
 
     function handleClearResponce() {
+        saveAnswer(null);
         delete sectionQuestion[i].answer;
         sectionQuestion[i].answered = false;
         sectionQuestion[i].review = false;
