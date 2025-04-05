@@ -44,21 +44,30 @@ app.get('/', (req, res) => {
 });
 
 // Handle socket connections
+const connectedSystems = {}
 io.on('connection', (socket) => {
 
   socket.on('registerSystem', () => {
     systemNameIndex++;
     const systemname = 'C' + systemNameIndex;
     const examname = 'Comprehensive-Viva'
-    const sendObj = {systemname : systemname,examname : examname}
+    const sendObj = {systemname : systemname,examname : examname};
+    connectedSystems[socket.id] = {name : systemname, alloted : false};
     socket.emit('systemregistered', sendObj);
-    console.log('a system connected, Name : ' + systemname);
+    console.log('a system connected, Name : ' + systemname + ' ID : ' + socket.id);
   })
 
-  // Handle disconnections
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
+   // Handle disconnections
+   socket.on('disconnect', () => {
+    const disconnectedSystem = connectedSystems[socket.id];
+    if (disconnectedSystem) {
+      console.log(`System disconnected: Name: ${disconnectedSystem['name']}, ID: ${socket.id}`);
+      delete connectedSystems[socket.id]; // Remove the mapping
+    } else {
+      console.log(`Unknown user disconnected: ID: ${socket.id}`);
+    }
   });
+
 
   // Handle custom events
   // socket.on('systemregistered', (msg) => {

@@ -1,0 +1,23 @@
+.questiontype {
+    padding: 2px;
+    padding-left: 10px;
+}
+
+.question {
+    height: 60vh;
+    background-color: #efefee;
+}
+
+.question fieldset {
+    height: 58vh;
+} 
+
+.question p {
+    margin-left: 20px;
+}
+
+.option {
+    display: block;
+    margin-top: 20px;
+    margin-left: 40px;
+}

@@ -1,0 +1,132 @@
+.sysanduser {
+    width: 100%;
+    background-color: #666666;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bordersimple {
+    border: 1px solid rgba(161, 161, 161, 0.548);
+}
+
+.sysinfo {
+    align-items: flex-start;
+    text-align: left;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+
+}
+
+.sysname {
+    font-size: 42px;
+    color: #f0f30e;
+}
+
+.userinfo {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+.userinfoinfo {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    height: 100%;
+    justify-content: space-around;
+    margin-right: 15px;
+}
+
+.applicantname {
+    color: white;
+
+}
+
+.normtext {
+    font-size: 20px;
+    color: white;
+}
+
+.imagediv {
+    height: 148px;
+    width: 150px;
+    background-color: white;
+    margin-bottom: 2px;
+}
+
+.loginformtitlebar {
+    margin-top: 60px;
+    background-color: #dcdddc;
+    width: 400px;
+    align-self: center;
+    justify-self: center;
+    text-align: left;
+    padding: 8px;
+    border-top-left-radius:10px;
+    border-top-right-radius: 10px;
+    box-sizing: border-box;
+}
+
+.remindsection {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formdiv {
+    height: 250px;
+    width: 400px;
+    padding: 50px;
+    padding-top: 25px;
+    justify-self: center;
+    align-self: center;
+    background-color: #f5f4f4;
+    box-sizing: border-box;
+}
+
+.inputdiv {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.personicondiv {
+    width: 40px;
+    height: 40px;
+    background-color: #efefee;
+}
+
+.personicon {
+    width: 40px;
+    height: 40px;
+}
+
+.forminput {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.buttondiv {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.submitbtn {
+    background-color: #34a1ed;
+    width: 100%;
+    color: white;
+}
+
+.submitbtn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}

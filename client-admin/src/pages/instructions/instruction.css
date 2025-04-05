@@ -1,0 +1,87 @@
+.instruction {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    height: 94%;
+}
+
+.instructionpane {
+    width: 80%;
+    box-sizing: border-box;
+    border-right: 1px solid black;
+    height: 100%;
+}
+
+.userpane {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    
+}
+
+.titlebar {
+    background-color: #b6e9f7;
+    width: 100%;
+    margin: 0;
+    height: 35px;
+}
+
+.title {
+    margin: 0;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.userimg {
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+    margin-top: 30px;
+}
+
+.applicantnameblack {
+    color: black;
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.instructiondiv {
+    text-align: left;
+    overflow: scroll;
+    height: 85vh;
+}
+
+.instructionfooter {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 5px;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.startexambtn {
+    color: black;
+    background-color: #fafbfa;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+
+.startexambtn:hover {
+    color: white;
+    background-color: #0c7cd5;
+}
+
+.startexambtn:disabled {
+    color: rgba(128, 128, 128, 0.438);
+    border: 0.25px solid rgba(119, 119, 119, 0.493);
+}
+
+.startexambtn:disabled:hover {
+    color: rgba(128, 128, 128, 0.438);
+    border: 0.25px solid rgba(119, 119, 119, 0.459);
+    background-color: white;
+    cursor: not-allowed;
+}
