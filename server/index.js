@@ -8,6 +8,8 @@ const examdetails = require('./handlers/examdetails');
 const fetchquestion = require('./handlers/fetchquestion');
 const saveAnswer = require('./handlers/saveAnswer');
 const getanswers = require('./handlers/getanswers');
+const getexams = require('./handlers/adminHandlers/getexams');
+const adminlogin = require('./handlers/adminHandlers/adminlogin');
 
 const app = express();
 const server = http.createServer(app);
@@ -76,13 +78,17 @@ io.on('connection', (socket) => {
   // });
 });
 
-
+// client API
 app.post('/verify',verify);
 app.post('/login', login);
 app.post('/examdetails', examdetails);
 app.post('/fetchquestion', fetchquestion);
 app.post('/saveanswer', saveAnswer);
 app.post('/getanswers', getanswers);
+
+//server API
+app.post('/admin/getexams', getexams);
+app.post('/admin/adminlogin', adminlogin);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

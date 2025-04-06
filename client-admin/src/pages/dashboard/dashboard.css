@@ -1,13 +1,24 @@
 .dashboard {
     align-items: flex-start;
     display: flex;
+    height: 93.5%;
     flex-direction: column;
     gap: 1rem;
     padding: 5px;
     background-color: #efefee;
+    overflow: hidden;
 }
 
 .heading {
     font-size : 2rem;
     font-weight: bold;
+}
+
+.tablediv {
+    width: 100vw;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
 }
