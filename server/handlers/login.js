@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 module.exports = async function (req, res) {
     const database = require('../connector')
     const collectionName = "candidates";
@@ -8,6 +10,9 @@ module.exports = async function (req, res) {
 
     const answerSheetCollectionName = 'answersheet';
     const answerSheetCollection = database.collection(answerSheetCollectionName);
+
+    const examCollectionName = 'examdetails';
+    const examCollection = database.collection(examCollectionName);
 
     var users = [];
 
@@ -21,12 +26,18 @@ module.exports = async function (req, res) {
             else {
                 const currentISOTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
                 const currentYear = new Date().getFullYear();
+
+                const exam = await examCollection.findOne({ _id : new ObjectId(users[0].examid) });
+                console.log("Exam Details : ", exam);
+
                 console.log("Login Request from the user : " + req.body.username);
                 const insertResult = await sessionCollection.insertOne({
                     'regno': req.body.username,
                     'name': users[0].name,
                     'sysname': req.body.sysname,
                     'exam': users[0].exam,
+                    'examid': users[0].examid,
+                    'duration': exam.time,
                     'login_time': currentISOTime
                 });
 
