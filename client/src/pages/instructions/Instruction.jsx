@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './instruction.css'
 import InstructionsHtml from './instructions'
 import { Route, useNavigate } from 'react-router-dom';
-import { fetchExamDetails, fetchQuestions } from '../exam/mediator';
+import { fetchExamDetails, fetchQuestions, fetchSessionDetails } from '../exam/mediator';
 function Instruction() {
   const [agreeTOC, setAgreeTOC] = useState(false);
   const navigate = useNavigate()
@@ -10,7 +10,8 @@ function Instruction() {
   async function startExamHandler() {
     const detfetchstat = await fetchExamDetails();
     const qnfetchstat = await fetchQuestions();
-    if (detfetchstat && qnfetchstat) {
+    const sessionFetch = await fetchSessionDetails()
+    if (detfetchstat && qnfetchstat && sessionFetch) {
       navigate('/exampage')
     }
     else {

@@ -27,14 +27,17 @@ module.exports = async function (sessionId) {
             if(diffInMinutes > duration) {
                 return({sucess : false, message : 'Session Expired'})
             }
+            else {
+                sessions[0].timeleft = duration - diffInMinutes; 
+            }
 
             return({sucess : true, data : sessions[0]})
         }
         else {
-            return({sucess : false})
+            return({sucess : false, message : 'Invalid Session'})
         }
     } catch (error) {
         console.log(error);
-        return({sucess : false});
+        return({sucess : false, message : "Error Occured", error: error});
     }
 }

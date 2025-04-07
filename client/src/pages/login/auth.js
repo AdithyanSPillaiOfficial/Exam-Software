@@ -15,6 +15,9 @@ async function handleSubmit(userCred) {
             if(data.status==='OK'){
                 return(data);
             }
+            else if(data.status == "Exam Time Finished"){
+                return('Exam Time Finished')
+            }
             else {
                 return(false)
             }

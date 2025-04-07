@@ -56,3 +56,31 @@ export const fetchExamDetails = async () => {
         return(false)
     }
 }
+
+export var sessiondetails = null
+export const fetchSessionDetails = async () => {
+    try {
+        const responce = await fetch(serverAddress+'/getsessiondetails',{
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({sessionid : sessionStorage.getItem('sessionId')}),
+        });
+
+        if(responce.ok){
+            const data = await responce.json();
+            console.log('Data Fetched', data);
+            if(data.status==='OK'){
+                sessiondetails = data.sessiondetails;
+                return(true);
+            }
+            else {
+                return(false)
+            }
+        }
+    } catch (error) {
+        console.log(error)
+        return(false)
+    }
+}

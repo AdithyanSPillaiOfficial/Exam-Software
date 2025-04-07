@@ -4,7 +4,7 @@ import QuestionView from './questionview/questionview'
 import { useNavigate } from 'react-router-dom';
 import { socket, connectSocket, disconnectSocket, connectionStatus } from "../../socket";
 import { sampleqn } from './sampleqn';
-import { examQuestions, examdetails } from './mediator';
+import { examQuestions, examdetails, sessiondetails } from './mediator';
 import { saveAnswertoDB } from './saveanswertodb';
 var i = 0;
 
@@ -34,8 +34,11 @@ function ExamPage() {
         navigate('/login');
     }
 
-    const initialTime = examdetails.time * 60;
-    const [seconds, setSeconds] = useState(initialTime);
+    
+
+    const initialTime = sessiondetails.timeleft;
+    if(initialTime < 0) {alert("Session Expired"); handleExamSubmit();}
+    const [seconds, setSeconds] = useState(initialTime*60);
 
     // Function to decrement the timer value
     const tick = () => {

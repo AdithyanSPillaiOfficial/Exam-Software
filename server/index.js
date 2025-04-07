@@ -10,6 +10,7 @@ const saveAnswer = require('./handlers/saveAnswer');
 const getanswers = require('./handlers/getanswers');
 const getexams = require('./handlers/adminHandlers/getexams');
 const adminlogin = require('./handlers/adminHandlers/adminlogin');
+const getsessiondetails = require('./handlers/getsessiondetails');
 
 const app = express();
 const server = http.createServer(app);
@@ -85,6 +86,7 @@ app.post('/examdetails', examdetails);
 app.post('/fetchquestion', fetchquestion);
 app.post('/saveanswer', saveAnswer);
 app.post('/getanswers', getanswers);
+app.post('/getsessiondetails', getsessiondetails);
 
 //server API
 app.post('/admin/getexams', getexams);

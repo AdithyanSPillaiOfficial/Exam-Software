@@ -56,12 +56,15 @@ function Login() {
     };
     if (userVarified) {
       const responce = await handleSubmit(userCred);
-      if (responce != false && responce != 'error') {
+      if (responce != false && responce != 'error' && responce != 'Exam Time Finished') {
         localStorage.setItem('isLogedIn', true);
         setLoginStatus(true);
         sessionStorage.setItem('logedIn', true);
         sessionStorage.setItem('sessionId', responce.sessionid);
         navigate('/instruction');
+      }
+      else if (responce === 'Exam Time Finished') {
+        alert('Login failed : Exam Time Finished');
       }
       else {
         alert('Login Failed');
