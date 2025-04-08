@@ -73,7 +73,7 @@ function Login() {
     }
     else {
       const responce = await handleVerify(userCred);
-      if (responce != false && responce != 'Exam Already Submitted') {
+      if (responce != false && responce != 'Exam Already Submitted' && responce.sessionId) {
         sessionStorage.setItem('sessionId', responce.sessionId);
         sessionStorage.setItem('username', responce.name);
         sessionStorage.setItem('examname',responce.exam)
