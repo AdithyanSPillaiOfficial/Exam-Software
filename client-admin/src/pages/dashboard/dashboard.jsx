@@ -31,6 +31,7 @@ function Dashboard() {
 
 
   function handleAddExam() {
+    setEditIndex(null)
     setExamForm({})
     setPopupOpen(!popupOpen);
   }
