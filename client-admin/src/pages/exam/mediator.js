@@ -4,12 +4,12 @@ export var examQuestions = [];
 
 export const fetchQuestions = async () => {
     try {
-        const responce = await fetch(serverAddress+'/fetchquestion',{
+        const responce = await fetch(serverAddress+'/admin/fetchquestion',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
             },
-            body: JSON.stringify({sessionid : sessionStorage.getItem('sessionId')}),
+            body: JSON.stringify({sessionid : sessionStorage.getItem('sessionId'), examid : sessionStorage.getItem('examid')}),
         });
 
         if(responce.ok){

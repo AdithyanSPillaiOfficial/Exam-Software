@@ -12,6 +12,7 @@ const getexams = require('./handlers/adminHandlers/getexams');
 const adminlogin = require('./handlers/adminHandlers/adminlogin');
 const getsessiondetails = require('./handlers/getsessiondetails');
 const userverify = require('./handlers/adminHandlers/userverify');
+const adminfetchquestion = require('./handlers/adminHandlers/adminfetchquestion');
 
 const app = express();
 const server = http.createServer(app);
@@ -93,6 +94,7 @@ app.post('/getsessiondetails', getsessiondetails);
 app.post('/admin/getexams', getexams);
 app.post('/admin/adminlogin', adminlogin);
 app.post('/admin/userverify', userverify);
+app.post('/admin/fetchquestion', adminfetchquestion);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
