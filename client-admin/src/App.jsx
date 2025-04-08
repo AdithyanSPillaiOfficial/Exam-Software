@@ -17,23 +17,24 @@ function App() {
   const [count, setCount] = useState(0)
   const isLogedIn = sessionStorage.getItem('isLogedIn');
 
-  useEffect(() => {
-    const handleContextmenu = e => {
-        e.preventDefault()
-        alert("Warning : Donot rightclick in this window")
-    }
-    document.addEventListener('contextmenu', handleContextmenu)
-    return function cleanup() {
-        document.removeEventListener('contextmenu', handleContextmenu)
-    }
-}, [ ])
+//   useEffect(() => {
+//     const handleContextmenu = e => {
+//         e.preventDefault()
+//         alert("Warning : Donot rightclick in this window")
+//     }
+//     document.addEventListener('contextmenu', handleContextmenu)
+//     return function cleanup() {
+//         document.removeEventListener('contextmenu', handleContextmenu)
+//     }
+// }, [ ])
 
-  if ((screen.availHeight || screen.height - 30) <= window.innerHeight) {
+  // if ((screen.availHeight || screen.height - 30) <= window.innerHeight) {
     
-  }
-  else {
-    alert("Please turn on Kiosk mode")
-  }
+  // }
+  // else {
+  //   alert("Please turn on Kiosk mode")
+  // }
+  
   // else {
   //   return (
   //     <div><h1>Please Open The App in Kiosk Mode</h1></div>
