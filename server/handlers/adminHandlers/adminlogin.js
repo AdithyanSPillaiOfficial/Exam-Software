@@ -8,12 +8,13 @@ module.exports = async function (req, res) {
         const user = await collection.find({ username: username, password: password }).toArray()
         if (user.length > 0) {
             const currentISOTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-            const insertResult = await sessionCollection.insertOne({name: user[0].name, username: username,organisation : user[0].organisation, login_time: currentISOTime })
+            const insertResult = await sessionCollection.insertOne({name: user[0].name,userid : user[0]._id, username: username,organisation : user[0].organisation, login_time: currentISOTime })
             const userdetails = {
                 'username': username,
                 'name': user[0].name,
                 'organisation': user[0].organisation,
-                'sessionid': insertResult.insertedId
+                'sessionid': insertResult.insertedId,
+                'userid' : user[0]._id
             }
             res.json({ 'status': 'OK', 'sessionid': insertResult.insertedId, 'userdetails': userdetails })
         }

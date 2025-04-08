@@ -1,21 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './dashboard.css'
+import { serverAddress } from '../../api';
 
 function Dashboard() {
-  const [exams, setExams] = useState([
-    {
-      id: 'boewwelfnlwn',
-      name: 'JavaScript',
-      status: 'Completed',
-      duration: '120'
-    },
-    {
-      id: 'cwewfwfwfwdv',
-      name: 'C Programmming',
-      status: 'Completed',
-      duration: '60'
-    }
-  ]);
+  const [exams, setExams] = useState([]);
 
   const [popupOpen, setPopupOpen] = useState(false);
   const [examForm, setExamForm] = useState({
@@ -27,6 +15,31 @@ function Dashboard() {
     sectionlist : []
   });
   const [editIndex, setEditIndex] = useState(null);
+
+
+  async function getExams() {
+    const responce = await fetch(serverAddress+ '/admin/getexams', {
+      'method' : 'POST',
+      'headers' : {
+        'Content-Type' : 'application/json'
+      },
+      body : JSON.stringify({
+        sessionid : sessionStorage.getItem('sessionId')
+      }),
+    })
+
+    if (responce.ok) {
+      const data = await responce.json();
+      if (data.status === 'OK') {
+        setExams(data.exams);
+      }
+    }
+  }
+
+  useEffect(() => {
+    getExams();
+  }, [])
+  
 
 
 
@@ -49,6 +62,12 @@ function Dashboard() {
     setExamForm({});
   }
 
+  function deleteExam(index) {
+    var tempExams = [...exams];
+    tempExams.splice(index, 1);
+    setExams(tempExams);
+  }
+
   return (
     <div className='dashboard'>
       <div className='heading'>Dashboard</div>
@@ -59,21 +78,24 @@ function Dashboard() {
             <th>Exam Name</th>
             <th>Short Code</th>
             <th>Status</th>
+            <th>Total Sections</th>
             <th>Duration</th>
             <th>Actions</th>
           </tr>
           {
             exams.map((exam, index) =>
             (
-              <tr key={exam.id}>
+              <tr key={index}>
                 <td>{index + 1}</td>
+                <td>{exam.longname}</td>
                 <td>{exam.name}</td>
-                <td>{exam.shortname}</td>
                 <td>{exam.status}</td>
-                <td>{exam.duration} mins</td>
+                <td>{exam.totalsections}</td>
+                <td>{exam.time} mins</td>
                 <td>
                   <button className='editbtn' onClick={() => {setExamForm(exams[index]); setEditIndex(index); setPopupOpen(true)}}>Edit</button>
                   <button className='editbtn'>Manage</button>
+                  <button className="editbtn" onClick={() => deleteExam(index)}>Delete</button>
                 </td>
               </tr>
             )
@@ -97,19 +119,19 @@ function Dashboard() {
             <div className="formdiv bordersimple formdivheight">
               <div className='inputdiv'>
                 <div className='personicondiv bordersimple'><img src="https://drubinbarneslab.berkeley.edu/wp-content/uploads/2012/01/icon-profile.png" className='personicon' alt="" /></div>
-                <input type="text" placeholder='Exam Name' value={examForm.name} onChange={(e) => setExamForm(prev => ({...prev,name: e.target.value}))} className='forminput bordersimple' />
+                <input type="text" placeholder='Exam Name' value={examForm.longname} onChange={(e) => setExamForm(prev => ({...prev,longname: e.target.value}))} className='forminput bordersimple' />
               </div>
               <div className='inputdiv'>
                 <div className='personicondiv bordersimple'><img src="https://drubinbarneslab.berkeley.edu/wp-content/uploads/2012/01/icon-profile.png" className='personicon' alt="" /></div>
-                <input type="text" placeholder='Exam Short Name' value={examForm.shortname} onChange={(e) => setExamForm(prev => ({...prev,shortname: e.target.value}))} className='forminput bordersimple' />
+                <input type="text" placeholder='Exam Short Name' value={examForm.name} onChange={(e) => setExamForm(prev => ({...prev,name: e.target.value}))} className='forminput bordersimple' />
               </div>
               <div className='inputdiv'>
                 <div className='personicondiv bordersimple'><img src="https://cdn-icons-png.freepik.com/512/2893/2893425.png" className='personicon' alt="" /></div>
-                <input type="number" placeholder='No. of Sections' value={examForm.sections} onChange={(e) => setExamForm(prev => ({...prev, sections : e.target.value}))} className='forminput bordersimple' />
+                <input type="number" placeholder='No. of Sections' value={examForm.totalsections} onChange={(e) => setExamForm(prev => ({...prev, totalsections : e.target.value}))} className='forminput bordersimple' />
               </div>
               <div className='inputdiv'>
                 <div className='personicondiv bordersimple'><img src="https://cdn-icons-png.freepik.com/512/2893/2893425.png" className='personicon' alt="" /></div>
-                <input type="number" placeholder='Duration' value={examForm.duration} onChange={(e) => setExamForm(prev => ({...prev, duration : e.target.value}))} className='forminput bordersimple' />
+                <input type="number" placeholder='Duration' value={examForm.time} onChange={(e) => setExamForm(prev => ({...prev, time : e.target.value}))} className='forminput bordersimple' />
               </div>
               <div className="buttondiv">
                 <button className='submitbtn' onClick={editIndex !== null ? editExam : addExam} >{editIndex !== null ? "Edit Exam" : "Add Exam"}</button>
