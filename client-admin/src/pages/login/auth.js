@@ -1,7 +1,7 @@
 import { serverAddress } from "../../api";
 async function handleSubmit(userCred) {
     try {
-        const responce = await fetch(serverAddress+'/login',{
+        const responce = await fetch(serverAddress+'/admin/adminlogin',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -26,7 +26,7 @@ async function handleSubmit(userCred) {
 
 async function handleVerify(userCred){
     try {
-        const responce = await fetch(serverAddress+'/verify',{
+        const responce = await fetch(serverAddress+'/admin/userverify',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -39,9 +39,6 @@ async function handleVerify(userCred){
             console.log('Data Fetched');
             if(data.status==='OK'){
                 return(data.userdetails);
-            }
-            else if(data.status == 'Exam Already Submitted'){
-                return('Exam Already Submitted')
             }
             else {
                 return(false)

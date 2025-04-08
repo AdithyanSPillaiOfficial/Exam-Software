@@ -15,7 +15,7 @@ function Login() {
   const [userVarified, setUserVerified] = useState(false);
   const [loginStatus, setLoginStatus] = useState(false);
   const [userName, setUserName] = useState('Name')
-  const [examName, setExamName] = useState('Disconnected');
+  const [organisation, setOrganisation] = useState('Disconnected');
 
   const [uname, setUname] = useState('');
   const [password, setPassword] = useState('')
@@ -36,7 +36,7 @@ function Login() {
 
     socket.on("systemregistered", ({systemname, examname}) => {
       setSystemName(systemname);
-      setExamName(examname);
+      setOrganisation(examname);
       sessionStorage.setItem('examname',examname);
       setPermitLogin(true);
     });
@@ -61,7 +61,7 @@ function Login() {
         setLoginStatus(true);
         sessionStorage.setItem('logedIn', true);
         sessionStorage.setItem('sessionId', responce.sessionid);
-        navigate('/instruction');
+        navigate('/dashboard');
       }
       else {
         alert('Login Failed');
@@ -70,19 +70,15 @@ function Login() {
     }
     else {
       const responce = await handleVerify(userCred);
-      if (responce != false && responce != 'Exam Already Submitted') {
-        sessionStorage.setItem('sessionId', responce.sessionId);
+      if (responce != false ) {
+        // sessionStorage.setItem('sessionId', responce.sessionId);
         sessionStorage.setItem('username', responce.name);
-        sessionStorage.setItem('examname',responce.exam)
+        sessionStorage.setItem('organisation',responce.organisation)
         setUserName(responce.name);
-        setExamName(responce.exam);
+        setOrganisation(responce.organisation);
         setUserVerified(true);
         //navigate('/instruction');
       }
-      else if (responce === 'Exam Already Submitted'){
-        alert('Exam Already Submitted');
-      }
-
       else {
         alert('User verification Failed');
         console.log(status);
@@ -96,13 +92,13 @@ function Login() {
         <div className="sysinfo">
           <label className='normtext'>System name : </label>
           <label className="sysname">{systemName}</label>
-          <label className='normtext'>Kindly Contact Invigilator for Any Help</label>
+          <label className='normtext'>Kindly Contact Support for Any Help</label>
         </div>
         <div className="userinfo">
           <div className='userinfoinfo'>
             <label className="normtext">Name : </label>
             <label className="sysname">{userName}</label>
-            <label className="normtext">Subject : <label style={{ color: '#f0f30e' }}>{examName}</label></label>
+            <label className="normtext">Organisation : <label style={{ color: '#f0f30e' }}>{organisation}</label></label>
           </div>
           <div className='imagediv'>
             <img src="https://media.istockphoto.com/id/1177794485/vector/person-gray-photo-placeholder-woman.jpg?s=612x612&w=0&k=20&c=B41l9xgyu4bR63vPqt49mKZIRGh8ewpewN7zXnYPOsI=" alt="User Image" height={150} width={150} />

@@ -7,6 +7,14 @@ function Instruction() {
   const [agreeTOC, setAgreeTOC] = useState(false);
   const navigate = useNavigate()
 
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('isLogedIn');
+    if(!loginStatus) {
+      navigate('/login');
+    }
+  }, [])
+  
+
   async function startExamHandler() {
     const detfetchstat = await fetchExamDetails();
     const qnfetchstat = await fetchQuestions();

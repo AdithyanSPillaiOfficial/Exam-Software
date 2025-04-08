@@ -11,6 +11,7 @@ const getanswers = require('./handlers/getanswers');
 const getexams = require('./handlers/adminHandlers/getexams');
 const adminlogin = require('./handlers/adminHandlers/adminlogin');
 const getsessiondetails = require('./handlers/getsessiondetails');
+const userverify = require('./handlers/adminHandlers/userverify');
 
 const app = express();
 const server = http.createServer(app);
@@ -53,7 +54,7 @@ io.on('connection', (socket) => {
   socket.on('registerSystem', () => {
     systemNameIndex++;
     const systemname = 'C' + systemNameIndex;
-    const examname = 'Comprehensive-Viva'
+    const examname = 'Please Verify User'
     const sendObj = {systemname : systemname,examname : examname};
     connectedSystems[socket.id] = {name : systemname, alloted : false};
     socket.emit('systemregistered', sendObj);
@@ -91,6 +92,7 @@ app.post('/getsessiondetails', getsessiondetails);
 //server API
 app.post('/admin/getexams', getexams);
 app.post('/admin/adminlogin', adminlogin);
+app.post('/admin/userverify', userverify);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
