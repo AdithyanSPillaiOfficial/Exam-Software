@@ -56,7 +56,20 @@ function Dashboard() {
     setPopupOpen(false)
     setExamForm({});
   }
-  function editExam() {
+  async function editExam() {
+    const responce = await fetch(serverAddress + '/admin/editexam', {
+      'method': 'POST',
+      'headers': {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sessionid: sessionStorage.getItem('sessionId'),
+        exam : examForm
+      }),
+    })
+    if (!responce.ok) {
+      alert("Unable to Edit Exam");
+    }
     var tempExams = [...exams];
     tempExams[editIndex] = examForm;
     setExams(tempExams);

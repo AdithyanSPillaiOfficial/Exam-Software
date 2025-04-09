@@ -27,7 +27,8 @@ module.exports = async function (req, res) {
             exams = await cursor.toArray();
             if (exams.length == 1 && exams[0].createdby.toString() == user[0].userid.toString()) {
 
-                const questionCursor = await questionCollection.find({ _id: new ObjectId(exams[0].questioncode) });
+                console.log('Question Code : ', exams[0].questioncode.$oid.toString());
+                const questionCursor = await questionCollection.find({ _id: new ObjectId(exams[0].questioncode.$oid.toString()) });
                 const questionsArray = await questionCursor.toArray();
                 if (questionsArray.length == 1) {
                     const questions = questionsArray[0].questions
